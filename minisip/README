@@ -1,0 +1,27 @@
+README for minisip
+==================
+
+Minisip is a SIP user agent. It implements both normal and secured
+(SRTP/MIKEY) VoIP calls.
+
+Requirements:
+   . libmutil, libmnetutil, libmsip, libmikey
+   . libglademm-2.0 (and its dependencies: glib, GTK+, gtkmm, ...) for the GUI
+
+Installation:
+   Please refer to the INSTALL file for installation instructions.
+
+   In most cases, this should be enough:
+     $ ./configure
+     $ make
+     # make install
+
+   ./configure --help will give you the available compilation time options.
+
+   For the security features, you will need a X509 certificate (in its pem
+   form) and the matching private key. You will find examples in test_cert/
+   
+   For the experimental video support, have a look at Documentation/video.
+
+License:
+   Please refer to the COPYING file for license information.

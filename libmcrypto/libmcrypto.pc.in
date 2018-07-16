@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+pkglibdir=${libdir}/@PACKAGE@
+includedir=@includedir@
+pkgincludedir=${includedir}/@PACKAGE@
+
+Name: @PACKAGE@
+Description: Minisip Cryptography Library (AES, base64, HMAC, X509)
+Version: @VERSION@
+Requires: libmutil >= 0.8.0, libmnetutil >= 0.8.0
+Libs: -L${libdir} -lmcrypto
+Libs.private: @MINISIP_LIBS@ @OPENSSL_LIBS@ @GNUTLS_LIBS@ @SCSIM_LIBS@ @LIBS@
+Cflags: -I${includedir}

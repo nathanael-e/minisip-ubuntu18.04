@@ -1,0 +1,5 @@
+libmcrypto (0.8.0) unstable; urgency=low
+
+  * Initial release
+
+ -- Erik Eliasson <erik@dev.minisip.org>  Fri, 12 Sep 2008 12:32:03 +0200

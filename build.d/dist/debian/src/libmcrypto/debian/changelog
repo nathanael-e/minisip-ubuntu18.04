@@ -1,0 +1,5 @@
+libmcrypto (0.3.1-1~3) unstable; urgency=low
+
+  * Initial Release.
+  
+ -- Mikael Magnusson <mikma@users.sourceforge.net>  Thu,  1 Jun 2006 20:40:51 +0200

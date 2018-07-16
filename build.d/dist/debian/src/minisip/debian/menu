@@ -1,0 +1,2 @@
+?package(minisip):needs="X11" section="Apps/Net"\
+  title="minisip" command="/usr/bin/minisip_gtkgui"

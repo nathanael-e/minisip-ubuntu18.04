@@ -1,0 +1,281 @@
+build.pl: Action Reference Guide
+by Zachary T Welch <zw@superlucidity.net>
+Last Updated: April 21, 2006
+
+This document provides an overview as well as detailed explanations of the
+various "actions" supported by build.pl.
+
+Actions and Targets
+-------------------
+
+An action (or action combiation) must be given as the second argument 
+to build.pl, and it specifies what steps need to be performed for the 
+"targets" specifed later (or implied).
+
+Targets are specified in build.conf and vary depending on the system 
+being built.  In the case of minisip, these include the libm* library
+and minisip application projects
+
+Multiple Actions
+----------------
+
+Occasionally, it can be useful to perform multiple actions in the same step,
+such as when tooling around with the build system itself.  To do this, you
+can combine actions with the '+' delimiter:
+
+	./build.pl bootstrap+configure+compile+install minisip
+
+Normally, the system tries to detect an existing 'configure' script and main 
+'Makefile'; if found, it assumes the 'bootstrap' and 'configure' steps have 
+already been performed, respectively.  If that is the case, you will need
+to either run the steps by hand individually or combine them.  
+
+If you have not performed any actions in your repository, the above command 
+is just the long (and redundant) form of the following:
+	
+	./build.pl install minisip
+
+When changing a Makefile.am in a project that has already been compiled, 
+you might want to have the system to perform a 'bootstrap+configure':
+
+	./build.pl -S bootstrap+configure minisip
+
+That rebuilds the Makefiles for the minisip project (and only minisip).
+
+   ===================================================================
+
+                            Action Summary
+
+The following table provides a basic description of all currently
+supported actions.  
+
+Action Name	Description
+-------------	-------------
+envdump		Check your build tools versions and default environment.
+confdump	Check your configure options before building!!!
+bootstrap	Run autotools to create 'configure'.
+configure	Run configure to create Makefiles.
+
+compile		Run 'make'.
+install		Run 'make install'.
+uninstall	Run 'make uninstall'.
+clean		Run 'make clean'.
+dclean		Run 'make distclean'.
+mclean		Run 'make maintainer-clean'.
+
+dist		Run 'make dist'.
+distcheck	Run 'make distcheck'.
+tarballs	List distribution tarballs.
+tarcontents	List the contents of distribution tarballs.
+tarclean	Remove distribution tarballs.
+
+package		Create distribution packages for merging.
+packages	List distribution packages to be merged.
+pkgcontents	List the contents of distribution packages.
+pkgclean	Remove distribution packages.
+
+merge		Merge distribution packages into system.
+purge		Purge distribution packages from system.
+
+allclean	Run uninstall and mclean (if needed).
+hostclean	Run allclean, then remove current host build/install trees.
+repoclean	Run hostclean for all targets, then remove build/install trees.
+
+confclean	Remove all *.local configuration files from the build.d tree.
+
+check		Run 'make check' to test projects.
+run		Run the application from the local install tree.
+
+   ===================================================================
+ 
+                            Action Reference
+                            ----------------
+			    
+This section provides tips for using each supported action.
+
+
+                             Bootstrap Actions
+			     ..................
+
+envdump
+-------
+
+The 'envdump' action displays the versions for the following tools used
+by the build system: autoconf, automake, libtool, make, g++, and ld.
+
+In addition, this action will display the environment settings that will
+be used during the build process.
+
+confdump
+--------
+
+This action simply displays your current build configuration, which takes
+into account settings from many different files.  Running this action
+before proceeding with development ensures that you actually end up with
+the build configured like you originally intended.
+
+bootstrap
+---------
+
+Run aclocal, autoconf, autoheader, libtoolize, and automake.
+
+configure
+---------
+
+Run configure with custom options defined in build.local that override
+the default settings in build.conf.
+
+                             Development Actions
+			     ...................
+
+The following actions are frequently used during daily development.
+
+compile
+-------
+
+Run 'make'.  If you do not understand this, step away from the code!
+
+install
+-------
+
+Run 'make install' to update this repository's installation.
+
+uninstall
+---------
+
+Run 'make uninstall' to clean this repository's installation.
+
+clean
+-----
+
+Run 'make clean' to remove all files built by 'compile'.
+
+dclean
+------
+
+Run 'make distclean'.  After dclean, you must run 'configure' again.
+
+mclean
+------
+
+Run 'make maintainer-clean'.  If the build system works properly, this
+should remove all temporarily generated files.  This allows you to view
+your status (svn st) without having to supress extra files (svn st -q),
+which exposes files that you have created and need to address.  After
+mclean, you must run 'bootstrap' again.
+
+
+                       Distribution Actions
+                       ....................
+
+These actions allow maintainers to prepare fresh source tarballs for
+distribution or packaging.
+
+dist
+----
+
+Run 'make dist'.
+
+distcheck
+---------
+
+Run 'make distcheck', a combination of 'check'.
+
+tarballs
+--------
+
+List tarball files created by the 'dist' action.
+
+tarcontents
+-----------
+
+Lists the contents of the distribution tarballs; if the verbose option (-v)
+was passed to build.pl, that same flag will be passed to the 'tar' command.
+
+tarclean
+--------
+
+Remove any tarballs created by the 'dist' action.
+
+
+                         Packaging Actions
+                         .................
+	
+The implementation of these actions varies across different platform.
+All of these actions require 'dist' to be run to generate tarballs.
+
+package
+-------
+
+Runs the distribution package action, creating current packages.
+
+packages
+-------
+
+Lists the distribution packages created by the 'package' action.
+
+pkgcontents
+-----------
+
+Lists the contents of the distribution packages (as listed by 'pacakges').
+If not supported, it essentially runs 'tarcontents' for you.
+
+pkgclean
+--------
+
+Remove any distribution packages created by the 'package' action.
+
+
+merge
+-----
+
+Install the distribution packages on the local platform.
+
+purge
+-----
+
+Remove the distribution packages from the local platform.
+
+
+                       Miscellaneous Actions
+                       .....................
+
+allclean
+--------
+
+Run 'make uninstall' and 'make mclean' (if project Makefile exists), but
+leaves any leftover files in the 'build' and 'install' directories.
+
+hostclean
+---------
+
+Run 'allclean', completely remove the project's object tree, and remove
+installation for current host.  In effect, this action removes all files 
+for a given host platform (e.g. /{build,install}/x86-pc-linux-gnu/*).
+
+repoclean
+---------
+
+Run 'hostclean' for all packages, then completely remove build/install trees.
+In effect, this commands attempts to revert a working copy of the repository 
+to its pristine state in one step.
+
+confclean
+---------
+
+Remove any local configuration files in your build.d tree; this presently
+includes build.local, dist/*/dist.local, and arch/*/arch.local.  These 
+files will be automatically re-created the next time you run build.pl, so
+this can be useful to retreive their latest versions.
+
+check
+-----
+
+Run 'make check' to run any tests defined for the project(s).
+
+run
+---
+
+Run the command specified in build.local (or build.conf), after 'install'
+has been completed successfully and created it.
+

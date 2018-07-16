@@ -1,0 +1,13 @@
+README for ministun
+===================
+
+The 'ministun' package provides a standalone STUN client and server.  The 
+bulk of the STUN client and server implementations reside in libmstun, 
+where they can be used to build servers that implement different 
+policies or user agents that integrate STUN services.
+
+Copyright Notice
+----------------
+
+This library has been released under the GNU GPL v2, which has been
+included in this package.  See the COPYING file for information.  

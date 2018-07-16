@@ -1,0 +1,24 @@
+Index: Source/Modules/csharp.cxx
+===================================================================
+RCS file: /cvsroot/swig/SWIG/Source/Modules/csharp.cxx,v
+retrieving revision 1.97
+diff -u -r1.97 csharp.cxx
+--- Source/Modules/csharp.cxx	24 Oct 2006 20:29:27 -0000	1.97
++++ Source/Modules/csharp.cxx	25 Oct 2006 08:04:58 -0000
+@@ -1916,10 +1916,14 @@
+     if (csattributes)
+       Printf(function_code, "  %s\n", csattributes);
+     const String *methodmods = Getattr(n,"feature:cs:methodmodifiers");
+-    if (methodmods) {
++    if (methodmods && !is_smart_pointer()) {
+       Printf(function_code, "  %s ", methodmods);
+     } else {
+-      methodmods = (!is_public(n) ? protected_string : public_string);
++      if (methodmods)
++	/* Method of smart pointers should not be defined "override"  */
++	methodmods = Strcmp(methodmods, public_string) ? protected_string : public_string;
++      else
++	methodmods = (!is_public(n) ? protected_string : public_string);
+       Printf(function_code, "  %s ", methodmods);
+       if (!is_smart_pointer()) {
+         // Smart pointer classes do not mirror the inheritance hierarchy of the underlying pointer type, so no virtual/override/new required.

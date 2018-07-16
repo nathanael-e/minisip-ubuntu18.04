@@ -1,0 +1,323 @@
+/* include/compilation_config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if building universal (internal helper macro) */
+#undef AC_APPLE_UNIVERSAL_BUILD
+
+/* AEC support */
+#undef AEC_SUPPORT
+
+/* Use new avcodec context abi. */
+#undef AVCODEC_FIXES
+
+/* Compile DC1394 support */
+#undef DC1394_SUPPORT
+
+/* Debug output */
+#undef DEBUG_OUTPUT
+
+/* Compile DeckLink grabber support. */
+#undef DECKLINK_SUPPORT
+
+/* Use DirectSound sound driver */
+#undef DSOUND
+
+/* OSS support */
+#undef ENABLE_OSS
+
+/* Use the advanced floating point based resampler */
+#undef FLOAT_RESAMPLER
+
+/* Support gconf. */
+#undef GCONF_SUPPORT
+
+/* Stack trace functionality found */
+#undef HAS_EXECINFO
+
+/* Use the GSM CODEC */
+#undef HAS_GSM
+
+/* Use the Speex CODEC */
+#undef HAS_SPEEX
+
+/* Define to 1 if you have the <arpa/inet.h> header file. */
+#undef HAVE_ARPA_INET_H
+
+/* Define to 1 if you have the `avcodec_register_all' function. */
+#undef HAVE_AVCODEC_REGISTER_ALL
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <dsound.h> header file. */
+#undef HAVE_DSOUND_H
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `asound' library (-lasound). */
+#undef HAVE_LIBASOUND
+
+/* Define to 1 if you have the `avcodec' library (-lavcodec). */
+#undef HAVE_LIBAVCODEC
+
+/* Define to 1 if you have the <libdc1394/dc1394_control.h> header file. */
+#undef HAVE_LIBDC1394_DC1394_CONTROL_H
+
+/* Define to 1 if you have the `dsound' library (-ldsound). */
+#undef HAVE_LIBDSOUND
+
+/* Define to 1 if you have the `dxguid' library (-ldxguid). */
+#undef HAVE_LIBDXGUID
+
+/* Define to 1 if you have the `m' library (-lm). */
+#undef HAVE_LIBM
+
+/* Define to 1 if you have the `mcrypto' library (-lmcrypto). */
+#undef HAVE_LIBMCRYPTO
+
+/* Define to 1 if you have the `mikey' library (-lmikey). */
+#undef HAVE_LIBMIKEY
+
+/* Define to 1 if you have the `mnetutil' library (-lmnetutil). */
+#undef HAVE_LIBMNETUTIL
+
+/* Define to 1 if you have the `msip' library (-lmsip). */
+#undef HAVE_LIBMSIP
+
+/* Define to 1 if you have the `mstun' library (-lmstun). */
+#undef HAVE_LIBMSTUN
+
+/* Define to 1 if you have the `mutil' library (-lmutil). */
+#undef HAVE_LIBMUTIL
+
+/* Define to 1 if you have the `nsl' library (-lnsl). */
+#undef HAVE_LIBNSL
+
+/* Define to 1 if you have the `opie' library (-lopie). */
+#undef HAVE_LIBOPIE
+
+/* Define to 1 if you have the `qpe' library (-lqpe). */
+#undef HAVE_LIBQPE
+
+/* Define to 1 if you have the `rpcrt4' library (-lrpcrt4). */
+#undef HAVE_LIBRPCRT4
+
+/* Define to 1 if you have the `swscale' library (-lswscale). */
+#undef HAVE_LIBSWSCALE
+
+/* Define to 1 if you have the `uuid' library (-luuid). */
+#undef HAVE_LIBUUID
+
+/* Define to 1 if you have the `wsock32' library (-lwsock32). */
+#undef HAVE_LIBWSOCK32
+
+/* Define to 1 if you have the `Xv' library (-lXv). */
+#undef HAVE_LIBXV
+
+/* Define to 1 if you have the `z' library (-lz). */
+#undef HAVE_LIBZ
+
+/* Define to 1 if you have the `zrtpcpp' library (-lzrtpcpp). */
+#undef HAVE_LIBZRTPCPP
+
+/* Define to 1 if you have the <limits.h> header file. */
+#undef HAVE_LIMITS_H
+
+/* Define to 1 if you have the <linux/videodev.h> header file. */
+#undef HAVE_LINUX_VIDEODEV_H
+
+/* Define to 1 if you have the <malloc.h> header file. */
+#undef HAVE_MALLOC_H
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <mil.h> header file. */
+#undef HAVE_MIL_H
+
+/* Define to 1 if you have the <netdb.h> header file. */
+#undef HAVE_NETDB_H
+
+/* Define to 1 if you have the <netinet/in.h> header file. */
+#undef HAVE_NETINET_IN_H
+
+/* Define to 1 if you have the <portaudio.h> header file. */
+#undef HAVE_PORTAUDIO_H
+
+/* Define to 1 if you have the <SDL/SDL.h> header file. */
+#undef HAVE_SDL_SDL_H
+
+/* Define to 1 if you have the <SDL/SDL_ttf.h> header file. */
+#undef HAVE_SDL_SDL_TTF_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <syslog.h> header file. */
+#undef HAVE_SYSLOG_H
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#undef HAVE_SYS_IOCTL_H
+
+/* Define to 1 if you have the <sys/socket.h> header file. */
+#undef HAVE_SYS_SOCKET_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if the system has the type `uint'. */
+#undef HAVE_UINT
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have `include/version.h' */
+#undef HAVE_VERSION_H
+
+/* Define to 1 if you have the <X11/extensions/Xvlib.h> header file. */
+#undef HAVE_X11_EXTENSIONS_XVLIB_H
+
+/* Define to 1 if you have the <X11/extensions/Xv.h> header file. */
+#undef HAVE_X11_EXTENSIONS_XV_H
+
+/* Define to 1 if you have the <X11/Xlib.h> header file. */
+#undef HAVE_X11_XLIB_H
+
+/* Compile for iPAQ */
+#undef IPAQ
+
+/* iPAQ buzzer support */
+#undef IPAQ_BUZZER
+
+/* Enable support for contacts details stored on LDAP */
+#undef LDAPCONTACTS_SUPPORT
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#undef LT_OBJDIR
+
+/* Compile Matrox imaging library grabber support. Wrong MILDIR environmen
+   variablet? */
+#undef MATROX_SUPPORT
+
+/* MSRP support */
+#undef MSRP_SUPPORT
+
+/* No iPAQ buzzer support */
+#undef NBUZZER
+
+/* No debug output */
+#undef NDEBUG
+
+/* No OSS support */
+#undef NO_OSS
+
+/* Support configuration stored online */
+#undef ONLINECONF_SUPPORT
+
+/* Compile OpenGL support */
+#undef OPENGL_SUPPORT
+
+/* Use OPIE library */
+#undef OPIE
+
+/* Support the libosso library */
+#undef OSSO_SUPPORT
+
+/* P2T support */
+#undef P2T_SUPPORT
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* PortAudio V19 SoundDevice support. */
+#undef PORTAUDIO_SUPPORT
+
+/* SCSIM support */
+#undef SCSIM_SUPPORT
+
+/* Compile SDL support */
+#undef SDL_SUPPORT
+
+/* SNAKE support */
+#undef SNAKE_SUPPORT
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Build and run extended test suite */
+#undef TEST_SUITE
+
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#undef TIME_WITH_SYS_TIME
+
+/* STL enabled */
+#undef USE_STL
+
+/* Version number of package */
+#undef VERSION
+
+/* Compile video features */
+#undef VIDEO_SUPPORT
+
+/* Support configuration stored online */
+#undef VNC_SUPPORT
+
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+#  undef WORDS_BIGENDIAN
+# endif
+#endif
+
+/* Compile Xvideo support */
+#undef XV_SUPPORT
+
+/* Define to 1 if the X Window System is missing or not being used. */
+#undef X_DISPLAY_MISSING
+
+/* ZRTP support */
+#undef ZRTP_SUPPORT
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const

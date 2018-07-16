@@ -1,0 +1,149 @@
+#!/usr/bin/perl
+#
+#  build.local overrides example for minisip
+#
+#  Make a copy of this file named 'build.local' in the same directory, then
+#  you can simply remove comments from approriate lines to suit your needs. 
+#  Also, you can remove these fluffy comments if they make your skin crawl.
+#
+#  The settings provided here should be the opposite of the defaults.
+#
+#######
+
+###
+# These options override the equivalent command line option defaults
+# XXX: They also cause the command line options to be ignored.
+
+## Override environment
+# $ENV{AMVERS}="1.9";
+
+## Override default path locations
+## Note: these are not normally require and use sensible defaults.
+##
+# $topdir = '/path/to/repository/trunk';
+# $builddir = '/path/to/builddir';
+# $installdir = '/path/to/installdir';
+
+## Override default build machine specification
+## Note: Autodetection does not work (default is x86-pc-linux-pc)
+##
+# $buildspec = 'i686-pc-linux-gnu';
+
+## Override default host machine specification
+## Note: You should only set this when you are cross-compiling;
+##       if $hostspec is not set, the value of $buildspec is used.
+##
+# $hostspec = 'arm-unknown-linux-gnu';
+# $hostspec = 'powerpc-unknown-linux-gnu';
+
+## Override default host distribution (only affects 'merge' command)
+## Distributions currently supported by this system:
+##	gentoo
+##
+# $hostdist = 'gentoo';
+
+# ====================================================================
+
+## Select which UI you which to use with the 'run' action.  You can also
+## use the -A option to set this on the command line.
+## This can be an absolute path (without --prefix) or a program name.
+# $run_app = '/bin/minisip_textui';
+$run_app = 'minisip_gtkgui';
+
+## For programs, add_run_path can be used to extend the search path.
+# add_run_paths('lib/minisip/bin', 'libexec/minisip/bin');
+
+# ====================================================================
+
+## Use batch setting by default, with -S enabling "single mode"; normally, 
+## the targets specified by the user are built, and -S enables batch mode.
+## Note: The instructions in README.build assume this has been set, so
+## this ensures users following its instructions get what they expect.
+##
+$toggle_batch = 1;
+
+## The default_action can be used to let the build.pl script run without
+## bany arguments (excluding option parameters).
+##
+## Example #1: (re)install, (re)package, and (re)merge the target(s)
+# $default_action = 'install+dist+merge';
+##
+## Example #2: run distcheck on the target(s); performs critical checking
+# $default_action = 'distcheck';
+##
+## Example #3: run the target(s); previous steps are implicit
+# $default_action = 'run';
+
+## The default_target can be set to further expediate command line entry.
+## Typically, this should specify the topologically ultimate leaf target, 
+## which no other package (being built here) subsequently requires.
+##
+# $default_target = 'minisip';
+
+# ====================================================================
+
+###
+# The settings in this section override the configuration options for 
+# each package, providing alternatives for the defaults in 'build.conf'.
+
+## Override global configure parameters; also settable via the CLI.
+# set_global_configure_param(
+# 			'maintainer-mode' => 0,
+# 			debug => 1,
+# 			shared => 0,
+# 			static => 1,
+# 			'test-suite' => 1,
+# 		);
+
+## override libmutil configure parameters
+# set_configure_param('libmutil', 
+#			'color-terminal' => 0,
+# 			memdebug => 0,
+# 			pthread => '/path/to/pthread',
+# 		);
+
+## override libmcrypt configure parameters
+# set_configure_param('libmcrypto', 
+# 			'fast-aes' => 1,
+# 			openssl => '/path/to/openssl',
+# 			gnutls => '/path/to/gnutls',
+# 		);
+
+## override libmnetutil configure parameters
+# set_configure_param('libmnetutil', 
+# 			ipv6 => 0,
+# 		);
+
+## override shared libminisip/minisip configure parameters
+# set_configure_param(['minisip', 'libminisip'],
+#			autocall => 1,
+#			ipaq => 1,
+#			opie => 1,
+#			video => 1,
+#		);
+
+## override libminisip configure parameters
+# set_configure_param('libminisip',
+# 			aec => 1,
+#			alsa => 1,
+#			avcodec => '/path/to/libavcodec',
+#			'avcodec-fixes' => 1,
+#			buzzer => 1,
+#			dsound => 1,
+#			gconf => 0,
+#			ipsec => 1,
+#			portaudio => 1,
+#			p2t => 1,
+#			sdl => 1,
+#			zrtp => 1,	# incomplete!
+#		);
+
+## override minisip configure parameters
+# set_configure_param('minisip', 
+#			gtk => 0,
+#			p2t => 1,
+#			qtui => 1,
+#			qte => 1,
+#			textui => 1
+#		);
+

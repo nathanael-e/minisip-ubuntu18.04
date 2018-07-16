@@ -1,0 +1,14 @@
+ * Do a proper shut down:
+   - De-register from proxy
+ * Fix presence information compatible with MSN messenger (SIP mode).
+ * Separate threads for reading web phone books (prevent hang while
+   trying to download).
+ * Multiple calls handled correctly:
+   - local audio mixing
+ * Implement recording/replaying of calls.
+ * Fix best way of handling calling our self
+ * Write manual page?
+ * Create icon
+ * Ring in headphone when remote ringing?!
+ * Implement dis-continuous transmission of audio streams.
+ * Implement evolution-data-server and LDAP PhoneBookIo

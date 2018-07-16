@@ -1,0 +1,214 @@
+/* include/compilation_config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if building universal (internal helper macro) */
+#undef AC_APPLE_UNIVERSAL_BUILD
+
+/* Compile the conference bridge application */
+#undef CONF_GUI
+
+/* Debug output */
+#undef DEBUG_OUTPUT
+
+/* Use the GTK GUI */
+#undef GTK_GUI
+
+/* Define to 1 if you have the <arpa/inet.h> header file. */
+#undef HAVE_ARPA_INET_H
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define to 1 if you have the <glibconfig.h> header file. */
+#undef HAVE_GLIBCONFIG_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have libglademm version 2.6 or newer */
+#undef HAVE_LIBGLADEMM_2_6
+
+/* Define to 1 if you have the `m' library (-lm). */
+#undef HAVE_LIBM
+
+/* Define to 1 if you have the `mcrypto' library (-lmcrypto). */
+#undef HAVE_LIBMCRYPTO
+
+/* Define to 1 if you have the `mikey' library (-lmikey). */
+#undef HAVE_LIBMIKEY
+
+/* Define to 1 if you have the `minisip' library (-lminisip). */
+#undef HAVE_LIBMINISIP
+
+/* Define to 1 if you have the `mnetutil' library (-lmnetutil). */
+#undef HAVE_LIBMNETUTIL
+
+/* Define to 1 if you have the `msip' library (-lmsip). */
+#undef HAVE_LIBMSIP
+
+/* Define to 1 if you have the `mutil' library (-lmutil). */
+#undef HAVE_LIBMUTIL
+
+/* Define to 1 if you have the `nsl' library (-lnsl). */
+#undef HAVE_LIBNSL
+
+/* Define to 1 if you have the `opie' library (-lopie). */
+#undef HAVE_LIBOPIE
+
+/* Define to 1 if you have the `qpe' library (-lqpe). */
+#undef HAVE_LIBQPE
+
+/* Define to 1 if you have the `X11' library (-lX11). */
+#undef HAVE_LIBX11
+
+/* Define to 1 if you have the `Xext' library (-lXext). */
+#undef HAVE_LIBXEXT
+
+/* Define to 1 if you have the <limits.h> header file. */
+#undef HAVE_LIMITS_H
+
+/* Define to 1 if you have the <malloc.h> header file. */
+#undef HAVE_MALLOC_H
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <netdb.h> header file. */
+#undef HAVE_NETDB_H
+
+/* Define to 1 if you have the <netinet/in.h> header file. */
+#undef HAVE_NETINET_IN_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <syslog.h> header file. */
+#undef HAVE_SYSLOG_H
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#undef HAVE_SYS_IOCTL_H
+
+/* Define to 1 if you have the <sys/socket.h> header file. */
+#undef HAVE_SYS_SOCKET_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if the system has the type `uint'. */
+#undef HAVE_UINT
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have `include/version.h' */
+#undef HAVE_VERSION_H
+
+/* Support the Hildon extensions */
+#undef HILDON_SUPPORT
+
+/* Compile for iPAQ */
+#undef IPAQ
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#undef LT_OBJDIR
+
+/* Debug autocalling */
+#undef MINISIP_AUTOCALL
+
+/* No debug output */
+#undef NDEBUG
+
+/* Use libglademm-2.0 */
+#undef OLDLIBGLADEMM
+
+/* Use the OpenGL full screen user interface */
+#undef OPENGL_GUI
+
+/* Use OPIE library */
+#undef OPIE
+
+/* Support the libosso library */
+#undef OSSO_SUPPORT
+
+/* Push-to-talk support */
+#undef P2T_SUPPORT
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Use the Qt based user interface */
+#undef QT_GUI
+
+/* Use Qt Embedded windowing system */
+#undef QWS
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Build and run extended test suite */
+#undef TEST_SUITE
+
+/* Use the text based user interface */
+#undef TEXT_UI
+
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#undef TIME_WITH_SYS_TIME
+
+/* STL enabled */
+#undef USE_STL
+
+/* Version number of package */
+#undef VERSION
+
+/* Compile video features */
+#undef VIDEO_SUPPORT
+
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+#  undef WORDS_BIGENDIAN
+# endif
+#endif
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const

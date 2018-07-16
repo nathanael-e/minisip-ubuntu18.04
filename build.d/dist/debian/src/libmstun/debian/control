@@ -1,0 +1,29 @@
+Source: libmstun
+Priority: optional
+Section: devel
+Maintainer: Minisip developer team <minisip-devel@minisip.org>
+Uploaders: Mikael Magnusson <mikma@users.sourceforge.net>
+Build-Depends: debhelper (>= 4.0.0), dpatch, autotools-dev,
+ pkg-config, libmutil-dev (>= 0.3.1), libmnetutil-dev (>= 0.3.1)
+Standards-Version: 3.6.1
+
+Package: libmstun0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Minisip STUN Protocol Support Library - shared library
+ libmstun implements Simple Traversal of User Datagram Protocol (UDP)
+ Through Network Address Translators (NATs) (STUN), in a C++ library.
+ .
+ This package contains the libmstun0 runtime library.
+
+Package: libmstun-dev
+Architecture: any
+Depends: libmstun0 (= ${Source-Version}), libmutil-dev (>= 0.3.1),
+ libmnetutil-dev (>= 0.3.1)
+Description: Minisip STUN Protocol Support Library - development files
+ libmstun implements Simple Traversal of User Datagram Protocol (UDP)
+ Through Network Address Translators (NATs) (STUN), in a C++ library.
+ .
+ This package contains the header files and static library needed to
+ compile applications that use libmstun0.

@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+pkglibdir=${libdir}/@PACKAGE@
+includedir=@includedir@
+pkgincludedir=${includedir}/@PACKAGE@
+
+Name: @PACKAGE@
+Description: Minisip VoIP Application Support Library
+Version: @VERSION@
+Requires: libmutil >= 0.8.0, libmcrypto >= 0.8.0, libmnetutil >= 0.8.0, libmikey >= 0.8.0, libmsip >= 0.8.0
+Libs: -L${libdir} -lminisip
+Libs.private: @MINISIP_LIBS@ @LIBS@
+Cflags: -I${includedir}
