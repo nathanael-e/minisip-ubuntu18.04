@@ -13,5 +13,5 @@ Execute the following commands from the root directory to compile and install:
 
 minisip_textgui is located in "minisip/minisip/gui/textui/minisip_textui"
 
-The original respository can be found here https://github.com/csd/minisip and all credcit goes to the authors of this project.
+The original respository can be found here https://github.com/csd/minisip and all credit goes to the authors of this project.
 
