@@ -12,6 +12,7 @@ Execute the following commands from the root directory to compile and install:
  2. sudo ./buildall.sh
 
 minisip_textgui is located in "minisip/minisip/gui/textui/minisip_textui"
+
 .minisip.conf is located in /home/<user>/.minisip.conf
 
 The original respository can be found here https://github.com/csd/minisip and all credit goes to the authors of this project.
