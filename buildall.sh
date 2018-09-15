@@ -104,6 +104,7 @@ do
 			MUTIL_CFLAGS=$LOC_MUTIL_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params
+		make install
 	fi 
 
 	if [ ${subdir} = "libmcrypto" ]; then
@@ -113,6 +114,7 @@ do
 			MUTIL_CFLAGS=$LOC_MUTIL_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params
+		make install
 	fi
 	if [ ${subdir} = "libmnetutil" ]; then 
 		LOC_MNETUTIL_LIBS=-L$PWD/.libs
@@ -124,6 +126,7 @@ do
 			MCRYPTO_CFLAGS=$LOC_MCRYPTO_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params $libmnetutil_configure_params
+			make install
 	fi 
 
 	if [ ${subdir} = "libmikey" ]; then 
@@ -136,6 +139,7 @@ do
 			MCRYPTO_CFLAGS=$LOC_MCRYPTO_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params
+			make install
 	fi 
 	if [ ${subdir} = "libmstun" ]; then 
 		LOC_MSTUN_LIBS=-L$PWD/.libs
@@ -149,6 +153,7 @@ do
 			MNETUTIL_CFLAGS=$LOC_MNETUTIL_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params
+			make install
 	fi 
 	if [ ${subdir} = "libmsip" ]; then 
 		LOC_MSIP_LIBS=-L$PWD/.libs
@@ -162,6 +167,7 @@ do
 			MNETUTIL_CFLAGS=$LOC_MNETUTIL_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params
+			make install
 	fi 
 
 	if [ ${subdir} = "libminisip" ] ; then 
@@ -184,6 +190,7 @@ do
 			MSIP_CFLAGS=$LOC_MSIP_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params_libminisip
+			make install
 	fi 
 	
 	if [ ${subdir} = "minisip" ]; then 
@@ -206,6 +213,7 @@ do
 			LIBMINISIP_CFLAGS=$LOC_LIBMINISIP_CFLAGS \
 			CXXFLAGS="-Wall $compiler_debug" 	\
 					./configure $configure_params_minisip
+			make install
 	fi 
 	
 	echo "=========================================================="
