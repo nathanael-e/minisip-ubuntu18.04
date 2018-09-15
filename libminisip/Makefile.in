@@ -250,6 +250,8 @@ am__libminisip_la_SOURCES_DIST = source/Minisip.cxx \
 	source/subsystem_media/MediaHandler.cxx \
 	source/subsystem_media/MediaHandler.h \
 	source/subsystem_media/SubsystemMedia.cxx \
+	source/subsystem_media/EscrowService.cxx \
+	source/subsystem_media/EscrowService.h \
 	source/subsystem_media/Session.cxx \
 	source/subsystem_media/Session.h \
 	source/subsystem_media/MediaStream.cxx \
@@ -479,9 +481,10 @@ am__objects_12 = libminisip_la-IpProvider.lo \
 	libminisip_la-SimpleIp6Provider.lo \
 	libminisip_la-StunIpProvider.lo
 am__objects_13 = libminisip_la-MediaHandler.lo \
-	libminisip_la-SubsystemMedia.lo libminisip_la-Session.lo \
-	libminisip_la-MediaStream.lo libminisip_la-Media.lo \
-	libminisip_la-RealtimeMedia.lo libminisip_la-ReliableMedia.lo \
+	libminisip_la-SubsystemMedia.lo libminisip_la-EscrowService.lo \
+	libminisip_la-Session.lo libminisip_la-MediaStream.lo \
+	libminisip_la-Media.lo libminisip_la-RealtimeMedia.lo \
+	libminisip_la-ReliableMedia.lo \
 	libminisip_la-ReliableMediaServer.lo \
 	libminisip_la-RtpReceiver.lo \
 	libminisip_la-MediaCommandString.lo \
@@ -1184,6 +1187,8 @@ libcodec_g711_src = source/subsystem_media/codecs/G711CODEC.cxx \
 libmediahandler_src = source/subsystem_media/MediaHandler.cxx \
 			source/subsystem_media/MediaHandler.h \
 			source/subsystem_media/SubsystemMedia.cxx \
+			source/subsystem_media/EscrowService.cxx \
+			source/subsystem_media/EscrowService.h \
 			source/subsystem_media/Session.cxx \
 			source/subsystem_media/Session.h \
 			source/subsystem_media/MediaStream.cxx \
@@ -1795,6 +1800,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-CryptoContext.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-DefaultDialogHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-DtmfSender.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-EscrowService.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-FileSoundDevice.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-FileSoundDriver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-FileSoundSource.Plo@am__quote@
@@ -2616,6 +2622,13 @@ libminisip_la-SubsystemMedia.lo: source/subsystem_media/SubsystemMedia.cxx
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='source/subsystem_media/SubsystemMedia.cxx' object='libminisip_la-SubsystemMedia.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminisip_la-SubsystemMedia.lo `test -f 'source/subsystem_media/SubsystemMedia.cxx' || echo '$(srcdir)/'`source/subsystem_media/SubsystemMedia.cxx
+
+libminisip_la-EscrowService.lo: source/subsystem_media/EscrowService.cxx
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminisip_la-EscrowService.lo -MD -MP -MF $(DEPDIR)/libminisip_la-EscrowService.Tpo -c -o libminisip_la-EscrowService.lo `test -f 'source/subsystem_media/EscrowService.cxx' || echo '$(srcdir)/'`source/subsystem_media/EscrowService.cxx
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libminisip_la-EscrowService.Tpo $(DEPDIR)/libminisip_la-EscrowService.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='source/subsystem_media/EscrowService.cxx' object='libminisip_la-EscrowService.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminisip_la-EscrowService.lo `test -f 'source/subsystem_media/EscrowService.cxx' || echo '$(srcdir)/'`source/subsystem_media/EscrowService.cxx
 
 libminisip_la-Session.lo: source/subsystem_media/Session.cxx
 @am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminisip_la-Session.lo -MD -MP -MF $(DEPDIR)/libminisip_la-Session.Tpo -c -o libminisip_la-Session.lo `test -f 'source/subsystem_media/Session.cxx' || echo '$(srcdir)/'`source/subsystem_media/Session.cxx

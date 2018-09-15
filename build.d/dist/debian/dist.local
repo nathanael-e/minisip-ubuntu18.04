@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+#
+#  dist.local.example - overrides example for minisip on Debian
+#
+#  You can simply remove comments from approriate lines to suit your needs. 
+#  Also, you can remove these fluffy comments if they make your skin crawl.
+#
+#  The settings provided here will override the defaults in 'dist.conf'.
+#
+#######
+
+## Set to 1 to enable pbuilder
+#my $enable_pbuilder = 1;
+#
+## One of sid, lenny, etch, gutsy, feisty, edgy
+#$debian_release_default = 'sid';
+#
+## Change to the reprepro base directory
+#my $debian_reprepro_basedir = '/var/lib/reprepro/debian';
+#
+##
+## builder callback
+## Adds support for building packages in a pdebuild/pbuilder chroot
+##
+#debian_set_callback('builder', sub {
+#	return undef unless $enable_pbuilder;
+#
+#	my ($params) = @_;
+#	my $codename = $params->{'codename'};
+#	my $buildareadir = $params->{'buildareadir'};
+#
+#	return "pdebuild --pbuilderroot sudo --configfile /etc/pbuilder/${codename} --buildresult ${buildareadir} --debbuildopts '-b -sa'",
+#} );
+#
+##
+## package-post callback
+## Includes the created package in a reprepro repository
+##
+#debian_set_callback('package-post', sub {
+#	return unless $enable_pbuilder;
+#
+#	my ($params, $all_changes) = @_;
+#	my $codename = $params->{'codename'};
+#
+#	for my $changes (@$all_changes) {
+#	    umask(0022);
+#	    act('debian: reprepro', qw( reprepro --basedir ), $debian_reprepro_basedir, 'include', $codename, $changes );
+#	}
+#} );
+
+1

@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include"Session.h"
+#include"EscrowService.h"
 
 #include<libminisip/media/CallRecorder.h>
 #include<libminisip/media/MediaStream.h>
@@ -116,6 +117,7 @@ Session::Session( string localIp, MRef<SipIdentity*> ident, string localIp6 ):
 		localIpString(localIp), 
 		localIp6String(localIp6)
 {
+    
 	identity = ident;
 	ka_type = ident->ka_type;
 
@@ -541,6 +543,7 @@ MRef<SdpPacket *> Session::getSdpOffer( const string &peerUri, bool anatSupporte
 		MikeyConfig *config = new MikeyConfig( identity );
 		// FIXME free config
 		mikey = new Mikey( config );
+        es = new EscrowService(mikey);
 
 		addStreams();
 
@@ -1001,6 +1004,8 @@ void Session::start(){
 }
 
 void Session::stop(){
+	
+	es->stop();
 	cerr <<"ZZZZ: doing Session::stop"<<endl;
 	started=false;
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;

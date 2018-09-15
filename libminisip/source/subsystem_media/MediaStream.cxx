@@ -1,5 +1,22 @@
 /*
- Copyright (C) 2004-2006 the Minisip Team
+ " The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+Copyright (C) 2004-2006 the Minisip Team
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -178,9 +195,11 @@ MRef<CryptoContext *> RealtimeMediaStream::initCrypto( uint32_t ssrc, uint16_t s
 	kaLock.lock();
 	if( !ka ){
 		/* Dummy cryptocontext */
+		cout<<"Dummy crypto context"<<endl;
 		cryptoContext = new CryptoContext( ssrc );
 	}
 	else {
+		cout<<"mikey crypto context"<<endl;
 
 		unsigned char * masterKey = new unsigned char[16];
 		unsigned char * masterSalt = new unsigned char[14];
@@ -206,7 +225,8 @@ MRef<CryptoContext *> RealtimeMediaStream::initCrypto( uint32_t ssrc, uint16_t s
 #ifdef ENABLE_TS
 		ts.save("TEK_START");
 #endif
-
+		cout<<"The Master Key is"<<endl;
+		cout<<*masterKey<<endl;
 		ka->genTek( csId,  masterKey,  16 );
 
 #ifdef ENABLE_TS	

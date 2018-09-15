@@ -396,28 +396,28 @@ int Minisip::startSip() {
 
 		bool done;
 		int port = phoneConf->sipStackConfig->preferedLocalSipPort;
-		MRef<UDPSocket*> udpSocket;
-		int ntries = 8;
-		do{
-			done=true;
-			try{
-				udpSocket = new UDPSocket( port );
-			}catch(NetworkException &){
-				phoneConf->sipStackConfig->preferedLocalSipPort = port = 32768+rand()%32000;
-				done=false;
-			
-			}
-			ntries--;
-		}while (!done && ntries>0);
+		//MRef<UDPSocket*> udpSocket;
+		//int ntries = 8;
+		//do{
+		//	done=true;
+		//	try{
+		//		udpSocket = new UDPSocket( port );
+		//	}catch(NetworkException &){
+		//		phoneConf->sipStackConfig->preferedLocalSipPort = port = 32768+rand()%32000;
+		//		done=false;
+		//	
+		//	}
+		//	ntries--;
+	//	}while (!done && ntries>0);
 
 		// TODO call getExternalPort on the real UDPSocket:s
 		// when they are created
-		phoneConf->sipStackConfig->externalContactUdpPort = ipProvider->getExternalPort( udpSocket );
+	//	phoneConf->sipStackConfig->externalContactUdpPort = ipProvider->getExternalPort( udpSocket );
 		phoneConf->sipStackConfig->localIpString = externalContactIP;
 		phoneConf->sipStackConfig->externalContactIP = externalContactIP;
 		if( ip6Provider )
 			phoneConf->sipStackConfig->localIp6String = ip6Provider->getExternalIp();
-		udpSocket=NULL;
+	//	udpSocket=NULL;
 
 #ifdef DEBUG_OUTPUT
 		mout << BOLD << "init 5/9: Creating MediaHandler" << PLAIN << endl;

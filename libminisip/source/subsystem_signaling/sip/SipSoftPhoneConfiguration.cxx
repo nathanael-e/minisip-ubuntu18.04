@@ -143,6 +143,8 @@ void SipSoftPhoneConfiguration::save(){
 		backend->saveBool(accountPath + "dh_enabled", (*iIdent)->dhEnabled);
 		backend->saveBool(accountPath + "check_cert", (*iIdent)->checkCert);
 
+		cout<<"DH ENABLED: "<<(*iIdent)->dhEnabled<<endl;
+
 		backend->save(accountPath + "psk", (*iIdent)->getPsk() );
 
 
@@ -550,6 +552,8 @@ string SipSoftPhoneConfiguration::load( MRef<ConfBackend *> be ){
 		ident->pskEnabled  = backend->loadBool(accountPath + "psk_enabled");
 		ident->checkCert   = backend->loadBool(accountPath + "check_cert");
 
+		cout<<"DH enabled"<<ident->dhEnabled<<endl;
+
 
 		if( backend->loadString(accountPath + "ka_type", "psk") == "psk" )
 			ident->ka_type = KEY_MGMT_METHOD_MIKEY_PSK;
@@ -749,7 +753,7 @@ string SipSoftPhoneConfiguration::load( MRef<ConfBackend *> be ){
 		string proxy = backend->loadString(accountPath + "proxy_addr","");
 		uint16_t proxyPort = (uint16_t)backend->loadInt(accountPath +"proxy_port", 5060);
 
-		string preferredTransport = backend->loadString(accountPath +"transport", "UDP");
+		string preferredTransport = backend->loadString(accountPath +"transport", "TCP");
 
 		ident->setSipProxy( autodetect, uri, preferredTransport, proxy, proxyPort );
 

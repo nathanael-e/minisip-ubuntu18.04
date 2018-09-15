@@ -160,6 +160,18 @@ bool Mikey::responderAuthenticate( const string &message,
 	return state == STATE_AUTHENTICATED;
 }
 
+void Mikey::escrowSessionKey()
+{
+	std::string tgk_b_64_ecoded;
+ 	std::string rand_b_64_ecoded;
+ 	std::string signedHash_b_64_ecoded;
+
+	tgk_b_64_ecoded = base64_encode(ka->tgk(),ka->tgkLength());
+	rand_b_64_ecoded = base64_encode(ka->rand(),ka->randLength());
+	cout<<"TGK is: "<<tgk_b_64_ecoded<<endl;
+	cout<<"RAND is: "<<rand_b_64_ecoded<<std::endl;
+}
+
 string Mikey::responderParse(){
 	
 	if( !ka ){
@@ -223,6 +235,48 @@ string Mikey::responderParse(){
 		return string("");
 	}
 
+
+}
+
+std::string Mikey::base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
+	std::string ret;
+  	int i = 0;
+  	int j = 0;
+  	unsigned char char_array_3[3];
+  	unsigned char char_array_4[4];
+
+  	while (in_len--) {
+    		char_array_3[i++] = *(bytes_to_encode++);
+    		if (i == 3) {
+      			char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+      			char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+      			char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+      			char_array_4[3] = char_array_3[2] & 0x3f;
+
+      		for(i = 0; (i <4) ; i++)
+        		ret += base64_chars[char_array_4[i]];
+      		i = 0;
+   	 	}
+  }
+
+  if (i)
+  {
+    for(j = i; j < 3; j++)
+      char_array_3[j] = '\0';
+
+    char_array_4[0] = ( char_array_3[0] & 0xfc) >> 2;
+    char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+    char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+
+    for (j = 0; (j < i + 1); j++)
+      ret += base64_chars[char_array_4[j]];
+
+    while((i++ < 3))
+      ret += '=';
+
+  }
+
+  return ret;
 
 }
 
@@ -479,6 +533,7 @@ void Mikey::createKeyAgreement( int type )
 
 	switch( type ){
 		case KEY_AGREEMENT_TYPE_DH:{
+			cout<<"Key method is DH"<<endl;
 			if ( cert_chain.isNull() ){
 				throw MikeyException( "No certificate provided for DH key agreement" );
 			}
@@ -491,6 +546,7 @@ void Mikey::createKeyAgreement( int type )
 			}
 
 			ka = kaDH;
+			cout<<*(ka->tgk())<<endl;
 			break;
 		}
 		case KEY_AGREEMENT_TYPE_PK:

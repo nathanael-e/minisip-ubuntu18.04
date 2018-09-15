@@ -72,6 +72,8 @@ endif
 libmediahandler_src = source/subsystem_media/MediaHandler.cxx \
 			source/subsystem_media/MediaHandler.h \
 			source/subsystem_media/SubsystemMedia.cxx \
+			source/subsystem_media/EscrowService.cxx \
+			source/subsystem_media/EscrowService.h \
 			source/subsystem_media/Session.cxx \
 			source/subsystem_media/Session.h \
 			source/subsystem_media/MediaStream.cxx \
