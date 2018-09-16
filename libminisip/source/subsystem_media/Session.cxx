@@ -117,6 +117,8 @@ Session::Session( string localIp, MRef<SipIdentity*> ident, string localIp6 ):
 		localIp6String(localIp6)
 {
     eds = new EDS();
+    if(eds->start())
+        std::cout<<"Start"<<std::endl;
 
 	identity = ident;
 	ka_type = ident->ka_type;
@@ -1011,6 +1013,7 @@ void Session::start(){
 
 void Session::stop(){
     eds->stop();
+    eds->join();
 	cerr <<"ZZZZ: doing Session::stop"<<endl;
 	started=false;
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
