@@ -51,6 +51,11 @@ class LIBMIKEY_API IMikeyConfig: public virtual MObject{
 
 class LIBMIKEY_API Mikey: public MObject{
 	public:
+		const std::string base64_chars =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "abcdefghijklmnopqrstuvwxyz"
+                "0123456789+/";
+
 		enum State {
 			STATE_START = 0,
 			STATE_INITIATOR,
@@ -76,7 +81,11 @@ class LIBMIKEY_API Mikey: public MObject{
 					    const std::string &peerUri="" );
 		std::string responderParse();
 
+		void escrowSessionKey();
+
 		void setMikeyOffer();
+
+		std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len);
 
 		bool isSecured() const;
 		bool isInitiator() const;

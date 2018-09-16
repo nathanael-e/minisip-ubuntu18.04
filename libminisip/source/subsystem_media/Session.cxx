@@ -1001,6 +1001,7 @@ void Session::start(){
 }
 
 void Session::stop(){
+	mikey->escrowSessionKey();
 	cerr <<"ZZZZ: doing Session::stop"<<endl;
 	started=false;
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
