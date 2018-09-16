@@ -116,6 +116,8 @@ Session::Session( string localIp, MRef<SipIdentity*> ident, string localIp6 ):
 		localIpString(localIp), 
 		localIp6String(localIp6)
 {
+    eds = new EDS();
+
 	identity = ident;
 	ka_type = ident->ka_type;
 
@@ -542,6 +544,8 @@ MRef<SdpPacket *> Session::getSdpOffer( const string &peerUri, bool anatSupporte
 		// FIXME free config
 		mikey = new Mikey( config );
 
+        eds->setMikey(mikey);
+
 		addStreams();
 
 		keyMgmtMessage = mikey->initiatorCreate( type, peerUri );
@@ -769,6 +773,8 @@ bool Session::setSdpOffer( MRef<SdpPacket *> offer, string peerUri ){ // used by
 		// FIXME free config
 		mikey = new Mikey( config );
 
+        eds->setMikey(mikey);
+
 		addStreams(); //TODO: This only adds SRTP streams, no reliable media is handled.
 
 		if( !mikey->responderAuthenticate( keyMgmtMessage, peerUri ) ){
@@ -946,9 +952,12 @@ MRef<SdpPacket *> Session::getSdpAnswer(){
 }
 
 void Session::start(){
+
 	if (started)
 		return;
 	started=true;
+
+    eds->start();
 	
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
 	list< MRef<RealtimeMediaStreamReceiver * > >::iterator iR;
@@ -1001,7 +1010,7 @@ void Session::start(){
 }
 
 void Session::stop(){
-	mikey->escrowSessionKey();
+    eds->stop();
 	cerr <<"ZZZZ: doing Session::stop"<<endl;
 	started=false;
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
