@@ -19,7 +19,6 @@
 SUBDIRS="${SUBDIRS} libmutil"
 SUBDIRS="${SUBDIRS} libmnetutil"
 SUBDIRS="${SUBDIRS} libmcrypto"
-#SUBDIRS="${SUBDIRS} libmnetutil"
 SUBDIRS="${SUBDIRS} libmstun"
 SUBDIRS="${SUBDIRS} libmikey"
 SUBDIRS="${SUBDIRS} libmsip"
@@ -56,6 +55,7 @@ libmnetutil_configure_params="--enable-sctp"
 #              show just a sample
 libminisip_configure_params=""
 libminisip_configure_params="$libminisip_configure_params --enable-color-terminal"
+libminisip_configure_params="$libminisip_configure_params --enable-alsa"
       #--enable-autocall enables automatic calling for debug purposes (default disabled)
       #--enable-ipaq enables various fixes for the iPAQ (default disabled)
       #--enable-ipsec-enable enables ipsec features (default disabled)
@@ -67,7 +67,6 @@ libminisip_configure_params="$libminisip_configure_params --enable-color-termina
       #--enable-gconf enables support for GConf (default enabled).
       #--enable-sdl enables SDL video output if the required library is found
       #--enable-video enables video features (default disabled)
-      #--enable-p2t 
  
 #set special options for minisip
 #   do a ./configure --help to see ALL available options ... here

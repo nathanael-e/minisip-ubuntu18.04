@@ -24,7 +24,7 @@
 
 #include<config.h>
 
-#include<libmnetutil/TcpServerSocket.h>
+#include<libmnetutil/TCPSocket.h>
 
 #ifdef WIN32
 #	include<winsock2.h>

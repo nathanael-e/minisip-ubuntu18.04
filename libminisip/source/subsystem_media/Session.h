@@ -26,7 +26,7 @@
 #define SESSION_H
 
 #include<libminisip/libminisip_config.h>
-#include "EscrowService.h"
+
 #include<libmutil/MemObject.h>
 #include<libmutil/TimeoutProvider.h>
 
@@ -271,7 +271,6 @@ class LIBMINISIP_API Session : public MObject{
 		void setUDPSocket6 ( MRef<UDPSocket *> sock ) { this->sock6 = sock;}  ;
 		MRef<UDPSocket *> getUDPSocket(){return sock;};
 		MRef<UDPSocket *> getUDPSocket6(){return sock6;};		
-    MRef<Mikey *> mikey;
 
 
 	private:
@@ -305,8 +304,8 @@ class LIBMINISIP_API Session : public MObject{
 		std::list< MRef<RealtimeMediaStreamReceiver *> > realtimeMediaStreamReceivers;
 		std::list< MRef<RealtimeMediaStreamSender *> > realtimeMediaStreamSenders;
 		Mutex realtimeMediaStreamSendersLock;
-        
-        MRef<EscrowService*> es;
+
+		MRef<Mikey *> mikey;
 		std::string localIpString;
 		std::string localIp6String;
 		MRef<SdpPacket *> sdpAnswer;
