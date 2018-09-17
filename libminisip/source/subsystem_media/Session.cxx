@@ -116,8 +116,8 @@ Session::Session( string localIp, MRef<SipIdentity*> ident, string localIp6 ):
 		localIpString(localIp), 
 		localIp6String(localIp6)
 {
-    eds = new EDS();
-    if(eds->start())
+    lemp = new LEMP();
+    if(lemp->start())
         std::cout<<"Start"<<std::endl;
 
 	identity = ident;
@@ -546,7 +546,7 @@ MRef<SdpPacket *> Session::getSdpOffer( const string &peerUri, bool anatSupporte
 		// FIXME free config
 		mikey = new Mikey( config );
 
-        eds->setMikey(mikey);
+        lemp->setMikey(mikey);
 
 		addStreams();
 
@@ -775,7 +775,7 @@ bool Session::setSdpOffer( MRef<SdpPacket *> offer, string peerUri ){ // used by
 		// FIXME free config
 		mikey = new Mikey( config );
 
-        eds->setMikey(mikey);
+        lemp->setMikey(mikey);
 
 		addStreams(); //TODO: This only adds SRTP streams, no reliable media is handled.
 
@@ -959,7 +959,7 @@ void Session::start(){
 		return;
 	started=true;
 
-    eds->start();
+    lemp->start();
 	
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
 	list< MRef<RealtimeMediaStreamReceiver * > >::iterator iR;
@@ -1012,8 +1012,8 @@ void Session::start(){
 }
 
 void Session::stop(){
-    eds->stop();
-    eds->join();
+    lemp->stop();
+    lemp->join();
 	cerr <<"ZZZZ: doing Session::stop"<<endl;
 	started=false;
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;

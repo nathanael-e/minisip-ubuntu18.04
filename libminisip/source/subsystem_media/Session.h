@@ -30,7 +30,7 @@
 #include<libmutil/MemObject.h>
 #include<libmutil/TimeoutProvider.h>
 
-#include "EDS.h"
+#include "LEMP.h"
 #include<libmikey/Mikey.h>
 
 #include<libminisip/media/DtmfSender.h>
@@ -280,7 +280,7 @@ class LIBMINISIP_API Session : public MObject{
 		 * packet can not be used.
 		 */
 
-        MRef<EDS*> eds;
+        MRef<LEMP*> lemp;
 		bool addRealtimeMediaToOffer(MRef<SdpPacket*> result, const std::string &peerUri, bool anatSupported, std::string transport);
 		bool addReliableMediaToOffer(MRef<SdpPacket*> result, const std::string &peerUri, bool anatSupported);
 
