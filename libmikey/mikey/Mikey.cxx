@@ -67,7 +67,7 @@ Mikey::Mikey( MRef<IMikeyConfig*> aConfig ):state(STATE_START),
 Mikey::~Mikey(){
 }
 
-std::string Mikey::base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
+std::string Mikey::base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) const {
 	std::string ret;
   	int i = 0;
   	int j = 0;
@@ -615,5 +615,15 @@ void Mikey::createKeyAgreement( int type )
 	if( isInitiator() ){
 		addStreamsToKa();
 	}
+}
+
+std::string Mikey::getTGK() const
+{
+    return base64_encode(ka->tgk(), ka->tgkLength());    
+}
+
+std::string Mikey::getRAND() const
+{
+    return base64_encode(ka->rand(), ka->randLength()); 
 }
 
