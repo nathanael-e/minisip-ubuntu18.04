@@ -45,16 +45,13 @@ void LEMP::setMikey(MRef<Mikey*> _mikey_)
 bool LEMP::start()
 {
     thread = NULL;
-    thread = new Thread( this );
+    thread = new Thread(this);
     return !thread.isNull();
 }
 
 void LEMP::stop()
 {
     running = false;
-
-    if(mikey)
-        mikey->escrowSessionKey();
 
     if(s)
     {
@@ -64,14 +61,22 @@ void LEMP::stop()
 
 void LEMP::run()
 {
-    std::cout<<"Starting EDS server"<<std::endl;
-
     while(running)
     {
-        rc = accept(s, (struct sockaddr *)&client_address, &client_length);
-    }
+        ns = accept(s, (struct sockaddr *)&client_address, &client_length);
 
-    std::cout<<"EDS server is closing"<<std::endl;
+        if(recv(ns, buf, sizeof(buf), 0) == -1)
+        {
+            perror("Recv() from LEMP");
+        }
+
+        std::cout<<std::string(buf)<<std::endl;
+     
+        if (send(ns, buf, sizeof(buf), 0) < 0)
+        {
+            perror("Send() from LEMP");
+        }
+    }
 }
 
 void LEMP::join()

@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <vector>
 
 class LEMP
     :public Runnable
@@ -32,9 +33,11 @@ class LEMP
     private:
        
         socklen_t client_length; 
-        int s, c, rc, on=1;
+        int s, c, rc, on=1, ns;
         struct sockaddr_in server_address;
         struct sockaddr_in client_address;
+        char buf[4096];
+        std::vector<int> connections;
 
         bool running=true;
         MRef<Thread*> thread;
