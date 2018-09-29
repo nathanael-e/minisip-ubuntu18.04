@@ -959,8 +959,6 @@ void Session::start(){
 	if (started)
 		return;
 	started=true;
-
-    lemp->start();
 	
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
 	list< MRef<RealtimeMediaStreamReceiver * > >::iterator iR;
@@ -1046,6 +1044,7 @@ void Session::stop(){
 	}
 	callRecorder = NULL; //stop the call recorder object
     lemp->stop();
+    lemp = NULL;
 	realtimeMediaStreamSendersLock.unlock();
 
 }

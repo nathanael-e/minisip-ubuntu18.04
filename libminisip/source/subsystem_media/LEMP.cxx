@@ -163,6 +163,7 @@ void LEMP::run()
                 
                 std::cout<<"Closed all client connections"<<std::endl;
                 close(server_socket);
+                mikey = NULL;
                 return;
             }
         }
