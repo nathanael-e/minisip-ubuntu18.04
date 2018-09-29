@@ -117,6 +117,7 @@ Session::Session( string localIp, MRef<SipIdentity*> ident, string localIp6 ):
 		localIp6String(localIp6)
 {
     lemp = new LEMP();
+    lemp->init();
     if(lemp->start())
         std::cout<<"Start"<<std::endl;
 
@@ -1012,8 +1013,6 @@ void Session::start(){
 }
 
 void Session::stop(){
-    lemp->stop();
-    lemp->join();
 	cerr <<"ZZZZ: doing Session::stop"<<endl;
 	started=false;
 	list< MRef<RealtimeMediaStreamSender * > >::iterator iS;
@@ -1046,7 +1045,7 @@ void Session::stop(){
 		cr->free();
 	}
 	callRecorder = NULL; //stop the call recorder object
-
+    lemp->stop();
 	realtimeMediaStreamSendersLock.unlock();
 
 }

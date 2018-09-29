@@ -18,13 +18,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <vector>
+#include <sys/select.h>
+
+#define MAX_CLIENTS 30
 
 class LEMP
     :public Runnable
 {
 	public:
 		LEMP();
+        ~LEMP();
         bool start();
+        bool init();
         void stop();
         void join();
         virtual void run();
@@ -32,16 +37,18 @@ class LEMP
 
     private:
        
-        socklen_t client_length; 
-        int s, c, rc, on=1, ns;
-        struct sockaddr_in server_address;
-        struct sockaddr_in client_address;
-        char buf[4096];
-        std::vector<int> connections;
-
-        bool running=true;
+        int server_socket, addrlen, new_socket, 
+            activity, sd, max_sd, on=1, valread;
+        
+        struct sockaddr_in address;
+        struct timeval timeout;
+        
+        char buffer[4096];
+        fd_set readfds;
+        std::vector<int> client_sockets;
+        
+        bool hasEnded = false;
         MRef<Thread*> thread;
-        void init();
         MRef<Mikey*> mikey;
 };
 
