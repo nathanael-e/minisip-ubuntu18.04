@@ -7,6 +7,8 @@ EXTRA_DIST = libminisip.spec
 
 AM_CPPFLAGS = -I$(top_srcdir)/include $(MINISIP_CFLAGS)
 
+AM_LDFLAGS = -lssl -lcrypt
+
 pkgconfig_DATA = libminisip.pc
 
 
@@ -14,7 +16,7 @@ lib_LTLIBRARIES = libminisip.la
 libminisip_la_CPPFLAGS = $(AM_CPPFLAGS) -DMINISIP_PLUGINDIR=\"$(pluginsdir)\"
 
 libminisip_la_LDFLAGS = $(MINISIP_LIBRARY_LDFLAGS) \
-		$(RELOC_LDFLAGS)
+		$(RELOC_LDFLAGS) $(AM_LDFLAGS)
 
 libminisip_la_LIBADD = $(MINISIP_LIBS)
 
