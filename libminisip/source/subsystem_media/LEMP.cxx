@@ -16,6 +16,8 @@ LEMP::~LEMP()
 
 bool LEMP::init()
 {
+    std::cout<<"Init new LEMP"<<std::endl;
+
     /*
      * Create the server socket.
      */
@@ -75,6 +77,7 @@ void LEMP::setMikey(MRef<Mikey*> _mikey_)
 
 bool LEMP::start()
 {
+    hasEnded = false;
     thread = NULL;
     thread = new Thread(this);
     return !thread.isNull();
@@ -87,6 +90,8 @@ void LEMP::stop()
 
 void LEMP::run()
 {
+    std::cout<<"Starting LEMP server"<<std::endl;
+
     while(1)
     {
        /*

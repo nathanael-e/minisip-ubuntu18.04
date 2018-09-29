@@ -26,7 +26,10 @@ class LEMP
     :public Runnable
 {
 	public:
-		LEMP();
+ 
+        LEMP();
+        LEMP(LEMP const&) = delete;
+        void operator=(LEMP const&) = delete;
         ~LEMP();
         bool start();
         bool init();
@@ -36,7 +39,7 @@ class LEMP
         void setMikey(MRef<Mikey*>);
 
     private:
-       
+
         int server_socket, addrlen, new_socket, 
             activity, sd, max_sd, on=1, valread;
         
