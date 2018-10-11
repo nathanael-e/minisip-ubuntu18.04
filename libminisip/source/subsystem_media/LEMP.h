@@ -20,12 +20,17 @@
 #include <vector>
 #include <sys/select.h>
 
+/* SSL Headers */
+
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
 #define MAX_CLIENTS 30
 
 class LEMP
     :public Runnable
 {
-	public:
+    	public:
  
         LEMP();
         LEMP(LEMP const&) = delete;
@@ -40,6 +45,16 @@ class LEMP
 
     private:
 
+        struct Client
+        {
+            int fd = 0;
+            SSL* ssl;
+        };
+
+        bool create_ssl_context();
+        bool configure_ssl_context();
+        
+
         int server_socket, addrlen, new_socket, 
             activity, sd, max_sd, on=1, valread;
         
@@ -48,7 +63,9 @@ class LEMP
         
         char buffer[4096];
         fd_set readfds;
-        std::vector<int> client_sockets;
+        std::vector<Client> client_sockets;
+
+        SSL_CTX* ctx;
         
         bool hasEnded = false;
         MRef<Thread*> thread;

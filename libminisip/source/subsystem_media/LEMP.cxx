@@ -5,13 +5,16 @@ LEMP::LEMP()
 
 LEMP::~LEMP()
 {
-    std::cout<<"Destroying LEMP"<<std::endl;
+    SSL_CTX_free(ctx);
+    EVP_cleanup();
 
     if(server_socket)
     {
         std::cout<<"Closing LEMP server"<<std::endl;
         close(server_socket);
     }
+
+    std::cout<<"Destroying LEMP"<<std::endl;
 }
 
 bool LEMP::init()
@@ -67,6 +70,45 @@ bool LEMP::init()
 
     addrlen = sizeof(address);
 
+    SSL_load_error_strings();
+    
+    OpenSSL_add_ssl_algorithms();
+
+    if(!create_ssl_context())
+    {
+        std::cout<<"LEMP failed to create SSL context"<<std::endl;
+    }
+
+    if(!configure_ssl_context())
+    {
+        std::cout<<"LEMP failed to configure SSL context"<<std::endl;
+    }
+    
+    return true;
+}
+
+bool LEMP::create_ssl_context()
+{
+    const SSL_METHOD* method;
+    method = TLSv1_2_server_method();
+    ctx = SSL_CTX_new(method);
+
+    if(!ctx)
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+bool LEMP::configure_ssl_context()
+{
+    if((SSL_CTX_use_certificate_file(ctx, "/home/kamailio/cert.pem", SSL_FILETYPE_PEM) <= 0) ||
+       (SSL_CTX_use_PrivateKey_file(ctx, "/home/kamailio/key.pem", SSL_FILETYPE_PEM) <= 0 ))
+    {
+       return false;
+    }
+
     return true;
 }
 
@@ -105,7 +147,7 @@ void LEMP::run()
         timeout.tv_usec = 0;
 
        /*
-        * Add to server socket to the listening socket set and set the highest 
+        * Add the server socket to the listening socket set, and set the highest 
         * file descriptor to the value of server_socket.
         */
 
@@ -116,15 +158,15 @@ void LEMP::run()
         * Find open client connections.
         */
 
-        for(const auto& sd_client:client_sockets)
+        for(const auto& client:client_sockets)
         {
            //Add open client connections to the listening set.
-           if(sd_client > 0)
-              FD_SET(sd_client, &readfds);
+           if(client.fd > 0)
+              FD_SET(client.fd, &readfds);
            
            //Find the highest file descriptor.
-           if(sd_client > max_sd)
-               max_sd = sd_client;   
+           if(client.fd > max_sd)
+               max_sd = client.fd;   
         }
 
         /*
@@ -152,17 +194,17 @@ void LEMP::run()
             //Distribute the keys to the LEMF if the call has ended.
             if(hasEnded)
             {
-                for(auto& sd_client:client_sockets)
+                for(auto& client:client_sockets)
                 {
-                    if(sd_client > 0)
+                    if(client.fd > 0)
                     {
-                        close(sd_client);
-                        sd_client = 0;
+                        send(client.fd, mikey->getTGK().c_str(), mikey->getTGK().length(), 0);
+                        close(client.fd);
+                        client.fd = 0;
                     }
                 }
                 
                 std::cout<<"Closed all client connections"<<std::endl;
-                close(server_socket);
                 mikey = NULL;
                 return;
             }
@@ -180,28 +222,28 @@ void LEMP::run()
                      << " on port " << ntohs(address.sin_port) <<"."<<std::endl;
 
             //Add the new client to the list of connected clients.
-            for(auto& sd_client:client_sockets)
+            for(auto& client:client_sockets)
             {
-                if(sd_client == 0)
+                if(client.fd == 0)
                 {
-                    sd_client = new_socket;
+                    client.fd = new_socket;
                     break;
                 }
             }
         }
         else
         {
-            for(auto& sd_client:client_sockets)
+            for(auto& client:client_sockets)
             {
-                if(FD_ISSET(sd_client, &readfds))
+                if(FD_ISSET(client.fd, &readfds))
                 {
-                    if((valread = read(sd_client, buffer, 4095) <= 0))
+                    if((valread = read(client.fd, buffer, 4095) <= 0))
                     {
-                        getpeername(sd_client , (struct sockaddr*)&address , (socklen_t*)&addrlen);
+                        getpeername(client.fd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
                         std::cout<<"LEMF at address " << inet_ntoa(address.sin_addr) 
                         << " on port " << ntohs(address.sin_port) <<"closed connection prematurly."<<std::endl;
-                        close(sd_client);
-                        sd_client = 0;
+                        close(client.fd);
+                        client.fd = 0;
                     }
                     else
                     {
@@ -211,8 +253,6 @@ void LEMP::run()
             }
         }
     }
-
-    close(server_socket);
 }
 
 void LEMP::join()
