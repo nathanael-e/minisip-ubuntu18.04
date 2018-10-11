@@ -7,7 +7,7 @@ EXTRA_DIST = libminisip.spec
 
 AM_CPPFLAGS = -I$(top_srcdir)/include $(MINISIP_CFLAGS)
 
-AM_LDFLAGS = -lssl -lcrypt
+AM_LDFLAGS = -lssl -lcrypto
 
 pkgconfig_DATA = libminisip.pc
 
