@@ -196,9 +196,12 @@ void LEMP::run()
             {
                 for(auto& client:client_sockets)
                 {
+                
                     if(client.fd > 0)
                     {
-                        send(client.fd, mikey->getTGK().c_str(), mikey->getTGK().length(), 0);
+                        SSL_set_fd(client.ssl, client.fd);
+                        SSL_write(client.ssl, mikey->getTGK().c_str(), mikey->getTGK().length());
+                        SSL_free(client.ssl);
                         close(client.fd);
                         client.fd = 0;
                     }
@@ -221,12 +224,21 @@ void LEMP::run()
                      <<  " at address " << inet_ntoa(address.sin_addr) 
                      << " on port " << ntohs(address.sin_port) <<"."<<std::endl;
 
+            SSL* ssl = SSL_new(ctx);
+            SSL_set_fd(ssl, new_socket);
+
+            if(SSL_accept(ssl) <= 0)
+            {
+                std::cout<<"SSL accept failed"<<std::endl;
+            }
+             
             //Add the new client to the list of connected clients.
             for(auto& client:client_sockets)
             {
                 if(client.fd == 0)
                 {
                     client.fd = new_socket;
+                    client.ssl = ssl;
                     break;
                 }
             }
@@ -242,8 +254,10 @@ void LEMP::run()
                         getpeername(client.fd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
                         std::cout<<"LEMF at address " << inet_ntoa(address.sin_addr) 
                         << " on port " << ntohs(address.sin_port) <<"closed connection prematurly."<<std::endl;
+                        SSL_free(client.ssl);
                         close(client.fd);
                         client.fd = 0;
+                        client.ssl = NULL;
                     }
                     else
                     {
