@@ -1,5 +1,20 @@
 #include"LEMP.h"
 
+std::string LEMP::Client::toString()
+{
+    std::stringstream ss;
+
+    for(const auto& _ip_:ips)
+        ss<<_ip_<<",";
+
+    return ss.str();
+}
+
+bool LEMP::Client::operator==(int _fd_) const
+{
+    return fd ==_fd_;
+}
+
 LEMP::LEMP()
 : client_sockets(MAX_CLIENTS){}
 
@@ -143,7 +158,7 @@ void LEMP::run()
         */
 
         FD_ZERO(&readfds);
-	    timeout.tv_sec = 5;
+	    timeout.tv_sec = 1;
         timeout.tv_usec = 0;
 
        /*
@@ -194,16 +209,26 @@ void LEMP::run()
             //Distribute the keys to the LEMF if the call has ended.
             if(hasEnded)
             {
-                for(auto& client:client_sockets)
+                std::vector<std::string> keys = key_split(2,2);
+                std::string all_ips = Client::toString();
+
+                for(const auto& key:keys)
                 {
-                
-                    if(client.fd > 0)
-                    {
-                        SSL_set_fd(client.ssl, client.fd);
-                        SSL_write(client.ssl, mikey->getTGK().c_str(), mikey->getTGK().length());
-                        SSL_free(client.ssl);
-                        close(client.fd);
-                        client.fd = 0;
+                    for(auto& client:client_sockets)
+                    { 
+                        if(client.fd > 0)
+                        {
+                            std::string to_escrow = key + ";" + mikey->getRAND() + ";" + all_ips;
+                            SSL_set_fd(client.ssl, client.fd);
+                            SSL_write(client.ssl, to_escrow.c_str(), to_escrow.length());
+                            SSL_free(client.ssl);
+                            close(client.fd);
+                            client.fd = 0;
+                            auto it = std::find(client.ips.begin(),client.ips.end(), client.ip);
+                            if (it != client.ips.end())
+                                client.ips.erase(it);
+                            break; 
+                        }
                     }
                 }
                 
@@ -239,6 +264,9 @@ void LEMP::run()
                 {
                     client.fd = new_socket;
                     client.ssl = ssl;
+                    client.ip = inet_ntoa(address.sin_addr);
+                    client.ips.push_back(std::string(inet_ntoa(address.sin_addr)));
+                    n_connections++;
                     break;
                 }
             }
@@ -258,6 +286,11 @@ void LEMP::run()
                         close(client.fd);
                         client.fd = 0;
                         client.ssl = NULL;
+                        auto it = std::find(client.ips.begin(),client.ips.end(), client.ip);
+                        if (it != client.ips.end())
+                             client.ips.erase(it);
+                        client.ip = "";
+                        n_connections--;
                     }
                     else
                     {
@@ -269,9 +302,37 @@ void LEMP::run()
     }
 }
 
+std::vector<std::string> LEMP::key_split(int n, int m)
+{
+    std::vector<std::string> keys;
+    std::string key;
+    seed_random();
+    std::string tgk = mikey->getTGK();
+    
+    char* c_tgk = new char[tgk.length() + 1];
+    strcpy(c_tgk, tgk.c_str());
+    char* shares = generate_share_strings(c_tgk, n, m);
+
+    std::stringstream ss(shares);
+
+    if (shares != NULL)
+    {
+        while(std::getline(ss, key, '\n'))
+        {
+            keys.push_back(key);
+        }
+    }
+
+    free(shares);
+
+    return keys;
+}
+
 void LEMP::join()
 {
     if(thread.isNull())
         return;
     thread->join();
 }
+
+std::vector<std::string> LEMP::LEMP::Client::ips(0);

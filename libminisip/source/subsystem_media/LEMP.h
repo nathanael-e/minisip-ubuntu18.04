@@ -19,11 +19,15 @@
 #include <unistd.h>
 #include <vector>
 #include <sys/select.h>
+#include<algorithm>
 
 /* SSL Headers */
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+
+/* Shamir */
+#include"shamir.h" 
 
 #define MAX_CLIENTS 30
 
@@ -47,16 +51,23 @@ class LEMP
 
         struct Client
         {
+            static std::string toString();
+            bool operator==(int fd) const;
             int fd = 0;
             SSL* ssl;
+            std::string ip;
+            static std::vector<std::string> ips;
         };
 
         bool create_ssl_context();
         bool configure_ssl_context();
+        std::vector<std::string> key_split(int n, int m);
         
 
         int server_socket, addrlen, new_socket, 
             activity, sd, max_sd, on=1, valread;
+
+        int n_connections = 0;
         
         struct sockaddr_in address;
         struct timeval timeout;

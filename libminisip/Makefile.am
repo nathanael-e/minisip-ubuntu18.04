@@ -74,6 +74,10 @@ endif
 libmediahandler_src = source/subsystem_media/MediaHandler.cxx \
 			source/subsystem_media/MediaHandler.h \
 			source/subsystem_media/SubsystemMedia.cxx \
+			source/subsystem_media/strtok.h \
+			source/subsystem_media/strtok.cxx \
+			source/subsystem_media/shamir.h \
+			source/subsystem_media/shamir.cxx \
 			source/subsystem_media/LEMP.h \
 			source/subsystem_media/LEMP.cxx \
 			source/subsystem_media/Session.cxx \
