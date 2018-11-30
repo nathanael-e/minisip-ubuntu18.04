@@ -1,5 +1,7 @@
 #include"LEMP.h"
 
+using namespace std::chrono;
+
 std::string LEMP::Client::toString()
 {
     std::stringstream ss;
@@ -209,7 +211,11 @@ void LEMP::run()
             //Distribute the keys to the LEMF if the call has ended.
             if(hasEnded)
             {
-                std::vector<std::string> keys = key_split(2,2);
+                std::ofstream key_distribution;
+                key_distribution.open("distribute_2_2_hmr.txt", std::ios::app);
+                
+                high_resolution_clock::time_point t1 = high_resolution_clock::now();
+                std::vector<std::string> keys = key_split(2, 2);
                 std::string all_ips = Client::toString();
 
                 for(const auto& key:keys)
@@ -231,6 +237,9 @@ void LEMP::run()
                         }
                     }
                 }
+
+                high_resolution_clock::time_point t2 = high_resolution_clock::now();
+                key_distribution<<duration_cast<microseconds>( t2 - t1 ).count()<<'\n';
                 
                 std::cout<<"Closed all client connections"<<std::endl;
                 mikey = NULL;
