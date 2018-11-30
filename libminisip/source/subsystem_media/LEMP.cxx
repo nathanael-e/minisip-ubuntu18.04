@@ -239,7 +239,7 @@ void LEMP::run()
                 }
 
                 high_resolution_clock::time_point t2 = high_resolution_clock::now();
-                key_distribution<<duration_cast<microseconds>( t2 - t1 ).count()<<'\n';
+                key_distribution<<duration_cast<milliseconds>( t2 - t1 ).count()<<'\n';
                 
                 std::cout<<"Closed all client connections"<<std::endl;
                 mikey = NULL;
