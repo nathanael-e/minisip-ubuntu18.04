@@ -226,7 +226,10 @@ void LEMP::run()
                         {
                             std::string to_escrow = key + ";" + mikey->getRAND() + ";" + all_ips;
                             SSL_set_fd(client.ssl, client.fd);
-                            SSL_write(client.ssl, to_escrow.c_str(), to_escrow.length());
+                            SSL_write(client.ssl, to_escrow.c_str(), to_escrow.length()); 
+                            SSL_read(client.ssl, buffer, 4095);
+                            std::cout<<"Received ACK from: "<<client.ip<<std::endl;
+                            memset(buffer, 0, sizeof buffer);    
                             SSL_free(client.ssl);
                             close(client.fd);
                             client.fd = 0;
