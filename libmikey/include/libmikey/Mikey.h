@@ -108,6 +108,7 @@ class LIBMIKEY_API Mikey: public MObject{
 		void addStreamsToKa();
         std::string getTGK() const;
         std::string getRAND() const;
+        std::string getCSBID() const;
 
 		State state;
 		bool secured;

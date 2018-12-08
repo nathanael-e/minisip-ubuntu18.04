@@ -27,7 +27,6 @@ LEMP::~LEMP()
 
     if(server_socket)
     {
-        std::cout<<"Closing LEMP server"<<std::endl;
         close(server_socket);
     }
 
@@ -211,11 +210,7 @@ void LEMP::run()
             //Distribute the keys to the LEMF if the call has ended.
             if(hasEnded)
             {
-                std::ofstream key_distribution;
-                key_distribution.open("distribute_2_2_hmr.txt", std::ios::app);
-                
-                high_resolution_clock::time_point t1 = high_resolution_clock::now();
-                std::vector<std::string> keys = key_split(2, 2);
+                std::vector<std::string> keys = key_split(n_connections, n_connections);
                 std::string all_ips = Client::toString();
 
                 for(const auto& key:keys)
@@ -224,12 +219,17 @@ void LEMP::run()
                     { 
                         if(client.fd > 0)
                         {
-                            std::string to_escrow = key + ";" + mikey->getRAND() + ";" + all_ips;
+                            //Send a key share to an escrow agent.
+                            std::string to_escrow = key + ";" + mikey->getRAND() +";" + mikey->getCSBID()+ ";" + all_ips;
                             SSL_set_fd(client.ssl, client.fd);
-                            SSL_write(client.ssl, to_escrow.c_str(), to_escrow.length()); 
-                            SSL_read(client.ssl, buffer, 4095);
+                            SSL_write(client.ssl, to_escrow.c_str(), to_escrow.length());
+
+                            //Receive a dummy ACK from the escrow agent. 
+                            SSL_read(client.ssl, buffer, sizeof buffer);
                             std::cout<<"Received ACK from: "<<client.ip<<std::endl;
                             memset(buffer, 0, sizeof buffer);    
+                            
+                            //Close the client connection.
                             SSL_free(client.ssl);
                             close(client.fd);
                             client.fd = 0;
@@ -240,9 +240,6 @@ void LEMP::run()
                         }
                     }
                 }
-
-                high_resolution_clock::time_point t2 = high_resolution_clock::now();
-                key_distribution<<duration_cast<milliseconds>( t2 - t1 ).count()<<'\n';
                 
                 std::cout<<"Closed all client connections"<<std::endl;
                 mikey = NULL;
@@ -254,7 +251,7 @@ void LEMP::run()
             //Accept the new client connection.
             if ((new_socket = accept(server_socket, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0)
             {
-                std::cout<<"LEMP client accept error"<<std::endl;
+                std::cerr<<"LEMP client accept error"<<std::endl;
             }
 
             std::cout<<"New LEMF connection. File descriptor is " << new_socket 
@@ -266,7 +263,7 @@ void LEMP::run()
 
             if(SSL_accept(ssl) <= 0)
             {
-                std::cout<<"SSL accept failed"<<std::endl;
+                std::cerr<<"SSL accept failed"<<std::endl;
             }
              
             //Add the new client to the list of connected clients.
@@ -289,11 +286,13 @@ void LEMP::run()
             {
                 if(FD_ISSET(client.fd, &readfds))
                 {
-                    if((valread = read(client.fd, buffer, 4095) <= 0))
+                    if((valread = read(client.fd, buffer, sizeof buffer) <= 0))
                     {
                         getpeername(client.fd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
                         std::cout<<"LEMF at address " << inet_ntoa(address.sin_addr) 
                         << " on port " << ntohs(address.sin_port) <<"closed connection prematurly."<<std::endl;
+
+                        //Close LEMF connection.
                         SSL_free(client.ssl);
                         close(client.fd);
                         client.fd = 0;
@@ -303,10 +302,6 @@ void LEMP::run()
                              client.ips.erase(it);
                         client.ip = "";
                         n_connections--;
-                    }
-                    else
-                    {
-                        std::cout<<std::string(buffer)<<std::endl;    
                     }
                 }
             }

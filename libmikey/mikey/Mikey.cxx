@@ -617,6 +617,11 @@ void Mikey::createKeyAgreement( int type )
 	}
 }
 
+std::string Mikey::getCSBID() const
+{
+    return std::to_string(ka->csbId()); 
+}
+
 std::string Mikey::getTGK() const
 {
     return base64_encode(ka->tgk(), ka->tgkLength());    
