@@ -250,6 +250,7 @@ am__libminisip_la_SOURCES_DIST = source/Minisip.cxx \
 	source/subsystem_media/MediaHandler.cxx \
 	source/subsystem_media/MediaHandler.h \
 	source/subsystem_media/SubsystemMedia.cxx \
+	source/subsystem_media/LEMP.h source/subsystem_media/LEMP.cxx \
 	source/subsystem_media/Session.cxx \
 	source/subsystem_media/Session.h \
 	source/subsystem_media/MediaStream.cxx \
@@ -479,9 +480,10 @@ am__objects_12 = libminisip_la-IpProvider.lo \
 	libminisip_la-SimpleIp6Provider.lo \
 	libminisip_la-StunIpProvider.lo
 am__objects_13 = libminisip_la-MediaHandler.lo \
-	libminisip_la-SubsystemMedia.lo libminisip_la-Session.lo \
-	libminisip_la-MediaStream.lo libminisip_la-Media.lo \
-	libminisip_la-RealtimeMedia.lo libminisip_la-ReliableMedia.lo \
+	libminisip_la-SubsystemMedia.lo libminisip_la-LEMP.lo \
+	libminisip_la-Session.lo libminisip_la-MediaStream.lo \
+	libminisip_la-Media.lo libminisip_la-RealtimeMedia.lo \
+	libminisip_la-ReliableMedia.lo \
 	libminisip_la-ReliableMediaServer.lo \
 	libminisip_la-RtpReceiver.lo \
 	libminisip_la-MediaCommandString.lo \
@@ -1184,6 +1186,8 @@ libcodec_g711_src = source/subsystem_media/codecs/G711CODEC.cxx \
 libmediahandler_src = source/subsystem_media/MediaHandler.cxx \
 			source/subsystem_media/MediaHandler.h \
 			source/subsystem_media/SubsystemMedia.cxx \
+			source/subsystem_media/LEMP.h \
+			source/subsystem_media/LEMP.cxx \
 			source/subsystem_media/Session.cxx \
 			source/subsystem_media/Session.h \
 			source/subsystem_media/MediaStream.cxx \
@@ -1805,6 +1809,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-GroupListUserElement.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-Gui.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-IpProvider.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-LEMP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-LogEntry.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-MSRPMessage.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminisip_la-MXmlConfBackend.Plo@am__quote@
@@ -2616,6 +2621,13 @@ libminisip_la-SubsystemMedia.lo: source/subsystem_media/SubsystemMedia.cxx
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='source/subsystem_media/SubsystemMedia.cxx' object='libminisip_la-SubsystemMedia.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminisip_la-SubsystemMedia.lo `test -f 'source/subsystem_media/SubsystemMedia.cxx' || echo '$(srcdir)/'`source/subsystem_media/SubsystemMedia.cxx
+
+libminisip_la-LEMP.lo: source/subsystem_media/LEMP.cxx
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminisip_la-LEMP.lo -MD -MP -MF $(DEPDIR)/libminisip_la-LEMP.Tpo -c -o libminisip_la-LEMP.lo `test -f 'source/subsystem_media/LEMP.cxx' || echo '$(srcdir)/'`source/subsystem_media/LEMP.cxx
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libminisip_la-LEMP.Tpo $(DEPDIR)/libminisip_la-LEMP.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='source/subsystem_media/LEMP.cxx' object='libminisip_la-LEMP.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminisip_la-LEMP.lo `test -f 'source/subsystem_media/LEMP.cxx' || echo '$(srcdir)/'`source/subsystem_media/LEMP.cxx
 
 libminisip_la-Session.lo: source/subsystem_media/Session.cxx
 @am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminisip_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminisip_la-Session.lo -MD -MP -MF $(DEPDIR)/libminisip_la-Session.Tpo -c -o libminisip_la-Session.lo `test -f 'source/subsystem_media/Session.cxx' || echo '$(srcdir)/'`source/subsystem_media/Session.cxx

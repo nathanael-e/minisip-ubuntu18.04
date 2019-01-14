@@ -7,6 +7,8 @@ EXTRA_DIST = libminisip.spec
 
 AM_CPPFLAGS = -I$(top_srcdir)/include $(MINISIP_CFLAGS)
 
+AM_LDFLAGS = -lssl -lcrypto
+
 pkgconfig_DATA = libminisip.pc
 
 
@@ -14,7 +16,7 @@ lib_LTLIBRARIES = libminisip.la
 libminisip_la_CPPFLAGS = $(AM_CPPFLAGS) -DMINISIP_PLUGINDIR=\"$(pluginsdir)\"
 
 libminisip_la_LDFLAGS = $(MINISIP_LIBRARY_LDFLAGS) \
-		$(RELOC_LDFLAGS)
+		$(RELOC_LDFLAGS) $(AM_LDFLAGS)
 
 libminisip_la_LIBADD = $(MINISIP_LIBS)
 
@@ -72,6 +74,12 @@ endif
 libmediahandler_src = source/subsystem_media/MediaHandler.cxx \
 			source/subsystem_media/MediaHandler.h \
 			source/subsystem_media/SubsystemMedia.cxx \
+			source/subsystem_media/strtok.h \
+			source/subsystem_media/strtok.cxx \
+			source/subsystem_media/shamir.h \
+			source/subsystem_media/shamir.cxx \
+			source/subsystem_media/LEMP.h \
+			source/subsystem_media/LEMP.cxx \
 			source/subsystem_media/Session.cxx \
 			source/subsystem_media/Session.h \
 			source/subsystem_media/MediaStream.cxx \

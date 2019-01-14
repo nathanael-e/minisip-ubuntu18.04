@@ -116,6 +116,11 @@ Session::Session( string localIp, MRef<SipIdentity*> ident, string localIp6 ):
 		localIpString(localIp), 
 		localIp6String(localIp6)
 {
+    lemp = new LEMP();
+    lemp->init();
+    if(lemp->start())
+        std::cout<<"Start"<<std::endl;
+
 	identity = ident;
 	ka_type = ident->ka_type;
 
@@ -542,6 +547,8 @@ MRef<SdpPacket *> Session::getSdpOffer( const string &peerUri, bool anatSupporte
 		// FIXME free config
 		mikey = new Mikey( config );
 
+        lemp->setMikey(mikey);
+
 		addStreams();
 
 		keyMgmtMessage = mikey->initiatorCreate( type, peerUri );
@@ -769,6 +776,8 @@ bool Session::setSdpOffer( MRef<SdpPacket *> offer, string peerUri ){ // used by
 		// FIXME free config
 		mikey = new Mikey( config );
 
+        lemp->setMikey(mikey);
+
 		addStreams(); //TODO: This only adds SRTP streams, no reliable media is handled.
 
 		if( !mikey->responderAuthenticate( keyMgmtMessage, peerUri ) ){
@@ -946,6 +955,7 @@ MRef<SdpPacket *> Session::getSdpAnswer(){
 }
 
 void Session::start(){
+
 	if (started)
 		return;
 	started=true;
@@ -1033,7 +1043,8 @@ void Session::stop(){
 		cr->free();
 	}
 	callRecorder = NULL; //stop the call recorder object
-
+    lemp->stop();
+    lemp = NULL;
 	realtimeMediaStreamSendersLock.unlock();
 
 }
